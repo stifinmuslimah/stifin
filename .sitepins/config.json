@@ -7,7 +7,7 @@
     "root": "src/pages/blog"
   },
   "code": {
-    "root": "src"
+    "root": "src/scripts"
   },
   "themeConfig": [
     "astro.config.mjs"
