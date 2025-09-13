@@ -6,7 +6,7 @@ author: "Roy"
 authorRole: "Founder"
 authorAvatar: "https://randomuser.me/api/portraits/men/1.jpg"
 category: "Personal"
-image: "https://picsum.photos/600/400"
+image: "/images/gemini.png"
 ---
 
 Halo semuanya 👋 ini artikel pertama saya pakai Markdown.
