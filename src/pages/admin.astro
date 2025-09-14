@@ -1,0 +1,9 @@
+---
+import { TinaProvider, TinaEditProvider } from '@tinacms/astro'
+import tinaConfig from '../../tina/config'
+
+const tina = TinaEditProvider(tinaConfig)
+---
+<TinaProvider tina={tina}>
+  <h1>Welcome to TinaCMS Admin</h1>
+</TinaProvider>
