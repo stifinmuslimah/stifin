@@ -54,7 +54,7 @@ const stripHtml = (html) => (html ? html.replace(/<[^>]+>/g, '') : '');
           All Posts
         </a>
 
-        {categories.map((category) => {
+        <!-- {categories.map((category) => {
           // selalu aman — category sudah string dari atas
           const cat = category ?? 'Uncategorized';
           return (
@@ -65,7 +65,7 @@ const stripHtml = (html) => (html ? html.replace(/<[^>]+>/g, '') : '');
               {cat}
             </a>
           );
-        })}
+        })} -->
       </div>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -75,9 +75,9 @@ const stripHtml = (html) => (html ? html.replace(/<[^>]+>/g, '') : '');
           const title = data.title ?? 'Untitled';
           const date = formatDate(data.date);
           const description = data.description ?? stripHtml(post.html).slice(0, 160) + '...';
-          const author = data.author ?? 'Unknown';
-          const authorRole = data.authorRole ?? '';
-          const authorAvatar = data.authorAvatar ?? '/images/default-avatar.png';
+          const author = data.author ?? '@stifinmuslimah';
+          const authorRole = data.authorRole ?? 'Author';
+          const authorAvatar = data.authorAvatar ?? 'src/assets/stifin.svg';
           return (
             <div class="card border border-gray-200 dark:border-gray-700 overflow-hidden slide-up" style={'animation-delay: ' + (index * 100) + 'ms'}>
               <a href={'/blog/' + post.slug} class="block">

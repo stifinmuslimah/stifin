@@ -12,28 +12,21 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "astro:dev": "astro dev",
-    "tina:start": "tinacms start",
-    "dev": "concurrently \"npm run astro:dev\" \"npm run tina:start\"",
+    "dev": "tinacms dev -c \"astro dev\"",
     "build": "astro build",
-    "preview": "astro preview",
+    "preview": "astro build && astro preview",
     "astro": "astro"
   },
   "dependencies": {
     "@astrojs/alpinejs": "^0.4.9",
-    "@tailwindcss/typography": "^0.5.16",
-    "@tailwindcss/vite": "^4.1.13",
+    "@tailwindcss/vite": "^4.1.11",
     "alpinejs": "^3.14.9",
     "astro": "^5.13.7",
-    "tinacms": "^2.1.1"
+    "tailwindcss": "^4.1.11",
+    "tinacms": "^2.8.2"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.1.13",
     "@tinacms/cli": "^1.10.2",
-    "@types/node": "^24.4.0",
-    "autoprefixer": "^10.4.21",
-    "concurrently": "^9.2.1",
-    "postcss": "^8.5.6",
-    "tailwindcss": "^4.1.13"
+    "@types/node": "^24.4.0"
   }
 }

@@ -187,8 +187,8 @@
   @apply outline-hidden ring-2 ring-primary-500 dark:ring-primary-400;
 }
 
-/* --- custom fix untuk jarak antar paragraf di markdown --- */
-.prose p {
-  margin-top: 1em;
+article p {
   margin-bottom: 1em;
 }
+
+

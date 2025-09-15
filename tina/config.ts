@@ -30,7 +30,7 @@ export default defineConfig({
     collections: [
       {
         name: "post",
-        label: "Posts",
+        label: "Post",
         path: "src/content/blog/",
         fields: [
           {
@@ -38,6 +38,24 @@ export default defineConfig({
             name: "title",
             label: "Title",
             isTitle: true,
+            required: true,
+          },
+          {
+            type: "string",
+            name: "description",
+            label: "Description",
+            required: true,
+          },
+          {
+            type: "string",
+            name: "image",
+            label: "Image",
+            required: true,
+          },
+          {
+            type: "datetime",
+            name: "pubDate",
+            label: "publication Date",
             required: true,
           },
           {
