@@ -2,7 +2,8 @@
 const plans = [
   {
     name: "Starter",
-    price: 29,
+    price: 600000,
+    oldPrice: 750000,
     description: "Perfect for small teams and startups",
     features: [
       "Up to 5 team members",
@@ -13,11 +14,12 @@ const plans = [
     ],
     cta: "Start Free Trial",
     popular: false,
-    color: "primary"
+    color: "secondary"
   },
   {
     name: "Professional",
-    price: 79,
+    price: 950000,
+    oldPrice: 750000,
     description: "Ideal for growing businesses",
     features: [
       "Up to 20 team members",
@@ -28,13 +30,14 @@ const plans = [
       "Custom integrations",
       "Team collaboration tools"
     ],
-    cta: "Start Free Trial",
+    cta: "Start",
     popular: true,
-    color: "secondary"
+    color: "primary"
   },
   {
     name: "Enterprise",
-    price: 199,
+    price: 199000,
+    oldPrice: 750000,
     description: "For large organizations with complex needs",
     features: [
       "Unlimited team members",
@@ -80,8 +83,15 @@ const plans = [
           
           <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">{plan.name}</h3>
           <div class="mb-4">
-            <span class="text-4xl font-bold text-gray-900 dark:text-white">${plan.price}</span>
-            <span class="text-gray-500 dark:text-gray-400">/month</span>
+            {plan.oldPrice && (
+              <span class="text-lg text-gray-500 dark:text-gray-400 line-through block">
+                Rp {plan.oldPrice.toLocaleString('id-ID')}
+              </span>
+        )}
+              <span class="text-4xl font-bold text-gray-900 dark:text-white">
+                Rp {plan.price.toLocaleString('id-ID')}
+              </span>
+            <span class="text-gray-500 dark:text-gray-400">/orang</span>
           </div>
           <p class="text-gray-600 dark:text-gray-300 mb-6">{plan.description}</p>
           
