@@ -9,12 +9,95 @@ import HeroSection from '../components/HeroSection.astro';
 
 <Layout title="Pricing - SaaSify">
   <Header />
-  <main>
-    <HeroSection 
-      title="Simple, Transparent Pricing" 
-      highlightText="Pricing"
-      description="Choose the plan that works best for your business. All plans include a 14-day free trial with no credit card required."
-    />
+    <!-- Hero Section  -->
+<section class="relative pt-32 pb-20 md:pt-40 overflow-hidden hero-section">
+  <div class="container-custom relative z-10">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div class="slide-up" transition:animate="slide">
+        <h1 class="mb-6 text-secondary-900 dark:text-white leading-tight">
+          Peluang Bisnis <span class="text-primary-600 dark:text-primary-400">Promotor</span> STIFIn<br>
+        </h1>
+        <p class="text-xl text-secondary-600 dark:text-secondary-300 mb-8 max-w-lg">
+          Dengan menjadi seorang Licensed Promotor STIFIn, kamu bisa melakukan tes STIFIn dan membuka sesi private atau konsultasi penjelasan hasil tes STIFIn loh😄
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="#" class="btn-primary">
+            Ambil Peluang Ini Sekarang!
+          </a>
+        </div>
+      </div>
+      
+      <div class="relative fade-in" transition:animate="fade">
+        <!-- Animated Elephant SVG Hero Image -->
+        <div class="w-full max-w-lg mx-auto">
+          <!-- Ganti animasi SVG dengan gambar statis -->
+    <img src="/src/assets/promotor.svg" alt="Hero Image" class="w-full h-auto rounded-xl shadow-xl" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STIFIn Untuk Siapa -->
+    <section class="py-16 bg-white dark:bg-gray-800">
+      <div class="container-custom">
+        <div class="text-center mb-16">
+                    <h1 class="text-center mb-6 text-secondary-900 dark:text-white leading-tight">
+          Penghasilan <span class="text-primary-600 dark:text-primary-400">Meningkat</span><br>
+          Kerja <span class="text-primary-600 dark:text-primary-400">Fleksibel</span>
+          </h1>
+          <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+             Mengapa Menjadi Promotor STIFIn?
+          </p>
+        </div>
+      </div>
+    </section>
+
+<!-- 3 Keunggulan -->
+    <section class="py-1 bg-white dark:bg-gray-800">
+      <div class="container-custom">
+             
+        <!-- Integration Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          <!-- Integration Card -->
+          <div class="card p-6 border border-gray-200 dark:border-gray-700 flex flex-col items-center text-center">
+            <img src="src/assets/family.png" alt="Slack" class="w-16 h-16 mb-4" />
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Membuka Jasa Konsultasi (Private Session)</h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-4">
+              Berikan layanan konsultasi pribadi dan bantu klien mencapai potensi terbaik mereka.
+            </p>
+            <div class="mt-auto">
+              <a href="#" class="text-primary-600 dark:text-primary-400 font-medium hover:underline">Learn More</a>
+            </div>
+          </div>
+          
+          <!-- Integration Card -->
+          <div class="card p-6 border border-gray-200 dark:border-gray-700 flex flex-col items-center text-center">
+            <img src="src/assets/teacher.png" alt="Google Workspace" class="w-16 h-16 mb-4" />
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Membantu Orang Lain</h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-4">
+              Bantu individu memahami potensi genetik mereka dan berkontribusi positif bagi masyarakat.
+            </p>
+            <div class="mt-auto">
+              <a href="#" class="text-primary-600 dark:text-primary-400 font-medium hover:underline">Learn More</a>
+            </div>
+          </div>
+          
+          <!-- Integration Card -->
+          <div class="card p-6 border border-gray-200 dark:border-gray-700 flex flex-col items-center text-center">
+            <img src="src/assets/employee.png" alt="Salesforce" class="w-16 h-16 mb-4" />
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Keuntungan 300% Lebih</h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-4">
+              Keuntungan 300% lebih dari Modal Voucher Tes STIFIn. Dapatkan penghasilan menarik dengan melakukan tes STIFIn.
+            </p>
+            <div class="mt-auto">
+              <a href="#" class="text-primary-600 dark:text-primary-400 font-medium hover:underline">Learn More</a>
+            </div>
+          </div>         
+        </div>
+      </div>
+    </section>
+
     <PricingCmp />
     <Newsletter />
   </main>
