@@ -7,12 +7,11 @@ const plans = [
     description: "Paket untuk Kelas Lanjutan STIFIn",
     features: [
       "Workshop STIFIn Level 1",
-      "10GB storage",
-      "Basic analytics",
-      "24/7 email support",
-      "API access"
+      "1 Hari Pelatihan Online",
+      "Materi PDF"
     ],
-    cta: "Start Free Trial",
+    cta: "Join WSL1",
+    ctaLink: "https://wa.me/6282164476336/?text=Saya%20tertarik%20untuk%20bergabung%20dengan%20Paket%20WSL1",
     popular: false,
     color: "secondary"
   },
@@ -23,29 +22,28 @@ const plans = [
     description: "Paket untuk Kelas Lanjutan STIFIn",
     features: [
       "Workshop STIFIn Level 2",
-      "10GB storage",
-      "Basic analytics",
-      "24/7 email support",
-      "API access"
+      "3 Hari Pelatihan Online",
+      "Materi PDF"
     ],
-    cta: "Start Free Trial",
+    cta: "Join WSL2",
+    ctaLink: "https://wa.me/6282164476336/?text=Saya%20tertarik%20untuk%20bergabung%20dengan%20Paket%20WSL2",
     popular: false,
     color: "secondary"
   },
   {
-    name: "Paket Promotor",
-    price: 7950000,
-    oldPrice: 10500000,
-    description: "Paket Lengkap untuk Promotor STIFIn",
+    name: "Tools Promotor",
+    price: 4000000,
+    description: "Alat Lengkap untuk Promotor STIFIn",
     features: [
-      "Workshop STIFIn Level 1",
-      "Whorkshop STIFIn Level 2",
+      "ID Promotor",
       "Alat Scan + ID Promotor",
-      "Buku Pancarona Senilai Rp 290.000",
+      "Marketing KIT",
+      "Buku Pancarona STIFIn Senilai Rp 290.000",
       "Marketing KIT",
       "Group Support Eksklusif"
     ],
-    cta: "Contact Sales",
+    cta: "Dapatkan Tools Promotor",
+    ctaLink: "https://wa.me/6282164476336/?text=Saya%20tertarik%20untuk%20mendapatkan%20Tools%20Promotor%20STIFIn",
     popular: false,
     color: "accent"
   },
@@ -62,7 +60,8 @@ const plans = [
       "Marketing KIT",
       "Group Support Eksklusif"
     ],
-    cta: "Start",
+    cta: "Daftar Sekarang!",
+    ctaLink: "https://wa.me/6282164476336/?text=Saya%20tertarik%20untuk%20bergabung%20dengan%20Paket%20Promotor%20STIFIn",
     popular: true,
     color: "primary"
   }
@@ -73,11 +72,11 @@ const plans = [
   <div class="container-custom">
     <div class="text-center max-w-3xl mx-auto mb-16">
       <span class="inline-block px-4 py-1 rounded-full bg-accent-100 dark:bg-accent-900 text-accent-600 dark:text-accent-300 font-medium text-sm mb-4">
-        Pricing Plans
+        Paket Promotor STIFIn
       </span>
-      <h2 class="mb-6 text-gray-900 dark:text-white">Simple, Transparent Pricing</h2>
+      <h2 class="mb-6 text-gray-900 dark:text-white">Investasi Promotor STIFIn</h2>
       <p class="text-gray-600 dark:text-gray-300">
-        Choose the plan that works best for your business. All plans include a 14-day free trial.
+        Peluang masih luas dan terbuka lebar, dari 271 Juta penduduk Indonesia, baru 650 Ribu orang sudah tes STIFIn. Jadilah bagian dari perubahan besar ini dengan menjadi Promotor STIFIn.
       </p>
     </div>
     
@@ -119,18 +118,13 @@ const plans = [
           </ul>
           
           <a 
-            href="#signup" 
+            href={plan.ctaLink} 
             class={`w-full btn ${plan.popular ? `bg-${plan.color}-600 hover:bg-${plan.color}-700 text-white focus:ring-${plan.color}-500` : 'btn-outline'}`}
           >
             {plan.cta}
           </a>
         </div>
       ))}
-    </div>
-    
-    <div class="mt-12 text-center">
-      <p class="text-gray-600 dark:text-gray-300 mb-2">Need a custom plan for your specific needs?</p>
-      <a href="/contact" class="text-primary-600 dark:text-primary-400 font-medium hover:underline">Contact our sales team</a>
     </div>
   </div>
 </section>
