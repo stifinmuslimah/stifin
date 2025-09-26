@@ -1,12 +1,12 @@
 ---
 const plans = [
   {
-    name: "Starter",
-    price: 600000,
-    oldPrice: 750000,
-    description: "Perfect for small teams and startups",
+    name: "Paket WSL1",
+    price: 900000,
+    oldPrice: 1200000,
+    description: "Paket untuk Kelas Lanjutan STIFIn",
     features: [
-      "Up to 5 team members",
+      "Workshop STIFIn Level 1",
       "10GB storage",
       "Basic analytics",
       "24/7 email support",
@@ -17,42 +17,54 @@ const plans = [
     color: "secondary"
   },
   {
-    name: "Professional",
-    price: 950000,
-    oldPrice: 750000,
-    description: "Ideal for growing businesses",
+    name: "Paket WSL2",
+    price: 3500000,
+    oldPrice: 4500000,
+    description: "Paket untuk Kelas Lanjutan STIFIn",
     features: [
-      "Up to 20 team members",
-      "50GB storage",
-      "Advanced analytics",
-      "Priority support",
-      "API access",
-      "Custom integrations",
-      "Team collaboration tools"
+      "Workshop STIFIn Level 2",
+      "10GB storage",
+      "Basic analytics",
+      "24/7 email support",
+      "API access"
     ],
-    cta: "Start",
-    popular: true,
-    color: "primary"
+    cta: "Start Free Trial",
+    popular: false,
+    color: "secondary"
   },
   {
-    name: "Enterprise",
-    price: 199000,
-    oldPrice: 750000,
-    description: "For large organizations with complex needs",
+    name: "Paket Promotor",
+    price: 7950000,
+    oldPrice: 10500000,
+    description: "Paket Lengkap untuk Promotor STIFIn",
     features: [
-      "Unlimited team members",
-      "500GB storage",
-      "Enterprise analytics",
-      "Dedicated account manager",
-      "API access",
-      "Custom integrations",
-      "Team collaboration tools",
-      "Advanced security features",
-      "Custom branding"
+      "Workshop STIFIn Level 1",
+      "Whorkshop STIFIn Level 2",
+      "Alat Scan + ID Promotor",
+      "Buku Pancarona Senilai Rp 290.000",
+      "Marketing KIT",
+      "Group Support Eksklusif"
     ],
     cta: "Contact Sales",
     popular: false,
     color: "accent"
+  },
+  {
+    name: "Paket Promotor",
+    price: 7950000,
+    oldPrice: 10500000,
+    description: "Paket Lengkap untuk Promotor STIFIn",
+    features: [
+      "Workshop STIFIn Level 1",
+      "Whorkshop STIFIn Level 2",
+      "Alat Scan + ID Promotor",
+      "Buku Pancarona Senilai Rp 290.000",
+      "Marketing KIT",
+      "Group Support Eksklusif"
+    ],
+    cta: "Start",
+    popular: true,
+    color: "primary"
   }
 ];
 ---
@@ -69,7 +81,7 @@ const plans = [
       </p>
     </div>
     
-    <div class="grid md:grid-cols-3 gap-8">
+    <div class="grid md:grid-cols-2 gap-8">
       {plans.map((plan, index) => (
         <div 
           class={`card p-6 border ${plan.popular ? `border-${plan.color}-500 dark:border-${plan.color}-400` : 'border-gray-200 dark:border-gray-700'} slide-up relative`}
