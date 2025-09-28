@@ -77,7 +77,7 @@ const stripHtml = (html) => (html ? html.replace(/<[^>]+>/g, '') : '');
           const description = data.description ?? stripHtml(post.html).slice(0, 160) + '...';
           const author = data.author ?? '@stifinmuslimah';
           const authorRole = data.authorRole ?? 'Author';
-          const authorAvatar = data.authorAvatar ?? 'src/assets/stifin.svg';
+          const authorAvatar = data.authorAvatar ?? '/asetweb/stifin.svg';
           return (
             <div class="card border border-gray-200 dark:border-gray-700 overflow-hidden slide-up" style={'animation-delay: ' + (index * 100) + 'ms'}>
               <a href={'/blog/' + post.slug} class="block">
