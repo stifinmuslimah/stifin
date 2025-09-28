@@ -4,7 +4,7 @@ title: Apa itu STIFIn?
 description: >-
   Yuk kenali potensi genetikmu lewat STIFIn untuk hidup, karier, dan hubungan
   yang lebih harmonis serta produktif.
-image: '/images/apa-itu-stifin.jpg'
+image: 'https://assets.tina.io/1cb31063-daec-4535-bc90-2e4f06a5cb85/apa-itu-stifin.jpg'
 date: 2025-09-26T17:00:00.000Z
 category: Artikel
 ---
