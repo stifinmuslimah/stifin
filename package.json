@@ -1,21 +1,22 @@
 {
-  "name": "larry-xue/astro-sassify-template",
-  "description": "A template for creating a SaaS landing page with Astro and Tailwind CSS",
-  "author": "Larry Xue",
+  "name": "STIFIn Muslimah",
+  "description": "Tes yang Bantu Identifikasi Kecerdasan dan Bakat yang Terpendam.",
+  "author": "STIFIn Muslimah",
   "license": "MIT",
-  "homepage": "https://astro-sassify.larryxue.dev/",
+  "homepage": "https://www.stifinmuslimah.com/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/larry-xue/astro-sassify-template.git"
+    "url": "https://github.com/stifinmuslimah/stifinmuslimah.com.git"
   },
   "type": "module",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "tinacms dev -c \"astro dev\"",
+    "dev": "tinacms dev --command 'astro dev'",
     "build": "astro build",
     "preview": "astro build && astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "tina:build": "tinacms build"
   },
   "dependencies": {
     "@astrojs/alpinejs": "^0.4.9",

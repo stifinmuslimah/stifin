@@ -1,8 +1,5 @@
 {
-  "rewrites": [
-    {
-      "source": "/admin",
-      "destination": "/admin/index.html"
-    }
-  ]
+  "buildCommand": "pnpm install --no-frozen-lockfile && pnpm run build",
+  "outputDirectory": "dist",
+  "framework": "astro"
 }

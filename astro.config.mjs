@@ -4,7 +4,7 @@ import alpinejs from '@astrojs/alpinejs';
 
 import tailwindcss from '@tailwindcss/vite';
 
-import vercel from '@astrojs/vercel';
+import vercel from "@astrojs/vercel/serverless";
 
 // https://astro.build/config
 export default defineConfig({
