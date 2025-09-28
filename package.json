@@ -12,7 +12,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "tinacms dev --command 'astro dev'",
+    "dev": "tinacms dev -c \"astro dev\"",
     "build": "tinacms build && astro build",
     "preview": "astro build && astro preview",
     "astro": "astro",
