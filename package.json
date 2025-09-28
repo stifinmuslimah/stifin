@@ -1,32 +1,34 @@
 {
-  "name": "larry-xue/astro-sassify-template",
-  "description": "A template for creating a SaaS landing page with Astro and Tailwind CSS",
-  "author": "Larry Xue",
+  "name": "STIFIn Muslimah",
+  "description": "Tes yang Bantu Identifikasi Kecerdasan dan Bakat yang Terpendam.",
+  "author": "STIFIn Muslimah",
   "license": "MIT",
-  "homepage": "https://astro-sassify.larryxue.dev/",
+  "homepage": "https://www.stifinmuslimah.com/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/larry-xue/astro-sassify-template.git"
+    "url": "https://github.com/stifinmuslimah/stifinmuslimah.com.git"
   },
   "type": "module",
   "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "tinacms dev -c \"astro dev\"",
-    "build": "astro build",
+    "build": "tinacms build && astro build",
     "preview": "astro build && astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "tina:build": "tinacms build"
   },
   "dependencies": {
     "@astrojs/alpinejs": "^0.4.9",
+    "@astrojs/vercel": "^8.2.8",
     "@tailwindcss/vite": "^4.1.11",
     "alpinejs": "^3.14.9",
     "astro": "^5.14.1",
-    "tailwindcss": "^4.1.11",
-    "tinacms": "^2.8.2"
+    "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
-    "@tinacms/cli": "^1.10.2",
-    "@types/node": "^24.4.0"
+    "@tinacms/cli": "^1.10.3",
+    "@types/node": "^24.4.0",
+    "tinacms": "^2.8.3"
   }
 }
