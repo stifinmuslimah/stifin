@@ -1,6 +1,6 @@
 import { defineConfig } from "tinacms";
 
-// Your hosting provider likely exposes this as an environment variable
+// Ambil nama branch (untuk preview deployment)
 const branch =
   process.env.GITHUB_BRANCH ||
   process.env.VERCEL_GIT_COMMIT_REF ||
@@ -10,9 +10,10 @@ const branch =
 export default defineConfig({
   branch,
 
-  // Get this from tina.io
-  clientId: process.env.PUBLIC_TINA_CLIENT_ID,
-  // Get this from tina.io
+  // Gunakan import.meta.env untuk variabel PUBLIC_* agar terbaca di client
+  clientId: import.meta.env.PUBLIC_TINA_CLIENT_ID,
+
+  // Token private hanya untuk server (tidak terbaca di browser)
   token: process.env.TINA_TOKEN,
 
   build: {
@@ -25,7 +26,7 @@ export default defineConfig({
       publicFolder: "public",
     },
   },
-  // See docs on content modeling for more info on how to setup new content models: https://tina.io/docs/schema/
+
   schema: {
     collections: [
       {
@@ -61,8 +62,19 @@ export default defineConfig({
           {
             type: "string",
             name: "category",
-            label: "Kategori (Pilih salah satu : Artikel, Berita, Parenting, Karir, Inspirasi, Pernikahan, Testimoni)",
+            label:
+              "Kategori (Pilih salah satu : Artikel, Berita, Parenting, Karir, Inspirasi, Pernikahan, Testimoni)",
             required: true,
+            // Jika ingin dropdown, bisa tambah opsi berikut:
+            options: [
+              "Artikel",
+              "Berita",
+              "Parenting",
+              "Karir",
+              "Inspirasi",
+              "Pernikahan",
+              "Testimoni",
+            ],
           },
           {
             type: "rich-text",
