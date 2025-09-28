@@ -13,7 +13,7 @@
   "private": true,
   "scripts": {
     "dev": "tinacms dev --command 'astro dev'",
-    "build": "astro build",
+    "build": "tinacms build && astro build",
     "preview": "astro build && astro preview",
     "astro": "astro",
     "tina:build": "tinacms build"
