@@ -11,7 +11,7 @@ export default defineConfig({
   branch,
 
   // Gunakan import.meta.env untuk variabel PUBLIC_* agar terbaca di client
-  clientId: import.meta.env.PUBLIC_TINA_CLIENT_ID,
+  clientId: import.meta.env.NEXT_PUBLIC_TINA_CLIENT_ID,
 
   // Token private hanya untuk server (tidak terbaca di browser)
   token: process.env.TINA_TOKEN,
