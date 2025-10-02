@@ -3,42 +3,32 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import HeroSection from '../../components/HeroSection.astro';
-import { getCollection } from 'astro:content';
+import { sanityClient } from "../../lib/sanityClient";
 
-// Ambil semua artikel
-const posts = await getCollection('blog');
+// === FETCH POSTINGAN SANITY ===
+const posts = await sanityClient.fetch(`*[_type == "post"] | order(_createdAt desc){
+  _id,
+  title,
+  "slug": slug.current,
+  "category": categories[0]->title,
+  description,
+  mainImage{
+    asset->{url}
+  },
+  publishedAt,
+  "authorName": author->name,
+  "authorImage": author->image
+}`);
 
-// Urutkan terbaru -> terlama (aman walau date missing)
-posts.sort((a, b) => new Date(b.data.date || 0) - new Date(a.data.date || 0));
+// Ambil daftar kategori unik
+const categories = [...new Set(posts.map(p => p.category || 'Uncategorized'))];
 
-// Render isi MD (opsional, kita pakai untuk fallback excerpt)
-const postsWithHtml = await Promise.all(
-  posts.map(async (p) => {
-    const rendered = await p.render();
-    return { ...p, html: rendered.html };
-  })
-);
-
-// Buat daftar kategori yang pasti string
-const categories = [
-  ...new Set(
-    postsWithHtml.map((p) => {
-      // pastikan ambil string, kalau null/undefined -> 'Uncategorized'
-      const c = p?.data?.category;
-      return typeof c === 'string' && c.trim() ? c.trim() : 'Uncategorized';
-    })
-  )
-];
-
-// Helper: slugify aman (menghindari crash kalau input undefined)
-const slugify = (s) => String(s ?? 'Uncategorized').trim().toLowerCase().replace(/\s+/g, '-');
-
-// Helper tanggal & HTML strip
 const formatDate = (d) =>
   d ? new Date(d).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
-const stripHtml = (html) => (html ? html.replace(/<[^>]+>/g, '') : '');
+const slugify = (s) => String(s ?? 'Uncategorized').trim().toLowerCase().replace(/\s+/g, '-');
 ---
-<Layout title="Blog - STIFIn Muslimah" description="Latest product updates, feature releases, and company news from SaaSify.">
+
+<Layout title="Blog - STIFIn Muslimah" description="Temukan wawasan STIFIn, potensi genetik, dan pengembangan diri untuk hidup lebih selaras dan SuksesMulia.">
   <Header />
   <main>
     <HeroSection 
@@ -54,8 +44,7 @@ const stripHtml = (html) => (html ? html.replace(/<[^>]+>/g, '') : '');
           All Posts
         </a>
 
-        <!-- {categories.map((category) => {
-          // selalu aman — category sudah string dari atas
+        {categories.map((category) => {
           const cat = category ?? 'Uncategorized';
           return (
             <a
@@ -65,53 +54,49 @@ const stripHtml = (html) => (html ? html.replace(/<[^>]+>/g, '') : '');
               {cat}
             </a>
           );
-        })} -->
+        })}
       </div>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {postsWithHtml.map((post, index) => {
-          const data = post.data ?? {};
-          const image = data.image ?? '/images/default.jpg';
-          const title = data.title ?? 'Untitled';
-          const date = formatDate(data.date);
-          const description = data.description ?? stripHtml(post.html).slice(0, 160) + '...';
-          const author = data.author ?? '@stifinmuslimah';
-          const authorRole = data.authorRole ?? 'Author';
-          const authorAvatar = data.authorAvatar ?? '/asetweb/stifin.svg';
+        {posts.map((post, index) => {
+          const image = post.mainImage?.asset?.url ?? '/images/default.jpg';
           return (
             <div class="card border border-gray-200 dark:border-gray-700 overflow-hidden slide-up" style={'animation-delay: ' + (index * 100) + 'ms'}>
               <a href={'/blog/' + post.slug} class="block">
                 <img 
                   src={image}
-                  alt={title}
+                  alt={post.title}
                   class="w-full h-48 object-cover"
                   loading="lazy"
                 />
               </a>
               <div class="p-6">
                 <div class="flex items-center mb-4">
-                  <span class="text-sm font-medium text-primary-600 dark:text-primary-400">{data.category ?? 'Uncategorized'}</span>
+                  <span class="text-sm font-medium text-primary-600 dark:text-primary-400">{post.category ?? 'Uncategorized'}</span>
                   <span class="mx-2 text-gray-300 dark:text-gray-600">•</span>
-                  <span class="text-sm text-gray-500 dark:text-gray-400">{date}</span>
+                  <span class="text-sm text-gray-500 dark:text-gray-400">{formatDate(post.publishedAt)}</span>
                 </div>
                 <a href={'/blog/' + post.slug} class="block mb-3">
-                  <h2 class="text-xl font-semibold text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors">{title}</h2>
+                  <h2 class="text-xl font-semibold text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors">{post.title}</h2>
                 </a>
                 <p class="text-gray-600 dark:text-gray-300 mb-6">
-                  {description}
+                  {post.description ?? ''}
                 </p>
-                <div class="flex items-center">
-                  <img 
-                    src={authorAvatar} 
-                    alt={author} 
-                    class="w-10 h-10 rounded-full mr-3 object-cover"
-                    loading="lazy"
-                  />
-                  <div>
-                    <p class="font-medium text-gray-900 dark:text-white">{author}</p>
-                    <p class="text-sm text-gray-500 dark:text-gray-400">{authorRole}</p>
+                {post.authorName && (
+                  <div class="flex items-center">
+                    {post.authorImage?.asset?.url && (
+                      <img 
+                        src={post.authorImage.asset.url} 
+                        alt={post.authorName} 
+                        class="w-10 h-10 rounded-full mr-3 object-cover"
+                        loading="lazy"
+                      />
+                    )}
+                    <div>
+                      <p class="font-medium text-gray-900 dark:text-white">{post.authorName}</p>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           );

@@ -1,32 +1,35 @@
 {
-  "name": "larry-xue/astro-sassify-template",
+  "name": "STIFIn-Muslimah",
   "description": "A template for creating a SaaS landing page with Astro and Tailwind CSS",
   "author": "Larry Xue",
   "license": "MIT",
-  "homepage": "https://astro-sassify.larryxue.dev/",
+  "homepage": "#",
   "repository": {
     "type": "git",
-    "url": "https://github.com/larry-xue/astro-sassify-template.git"
+    "url": "#"
   },
   "type": "module",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "tinacms dev -c \"astro dev\"",
+    "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro build && astro preview",
+    "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
     "@astrojs/alpinejs": "^0.4.9",
+    "@astrojs/react": "^4.4.0",
+    "@portabletext/react": "^4.0.3",
+    "@sanity/client": "^7.11.2",
     "@tailwindcss/vite": "^4.1.11",
     "alpinejs": "^3.14.9",
     "astro": "^5.14.1",
-    "tailwindcss": "^4.1.11",
-    "tinacms": "^2.9.0"
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
-    "@tinacms/cli": "^1.10.2",
     "@types/node": "^24.4.0"
   }
 }

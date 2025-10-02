@@ -2,65 +2,81 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import { getCollection } from 'astro:content';
+import { PortableText } from "@portabletext/react";
+import { sanityClient } from "../../lib/sanityClient";
 
+// ==== LIST SEMUA SLUG SAAT BUILD ====
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: { post },
-  }));
+  const posts = await sanityClient.fetch(`*[_type == "post"]{ "slug": slug.current }`);
+  return posts
+    .filter(p => p.slug)
+    .map(p => ({
+      params: { slug: p.slug }
+    }));
 }
 
-const { post } = Astro.props;
-const { Content } = await post.render();
+// ==== AMBIL DATA POST BERDASARKAN SLUG ====
+const { slug } = Astro.params;
+const post = await sanityClient.fetch(`*[_type == "post" && slug.current == $slug][0]{
+  _id,
+  title,
+  body,
+  mainImage{
+    asset->{url}
+  },
+  publishedAt,
+  "category": categories[0]->title,
+  "authorName": author->name,
+  "authorImage": author->image
+}`, { slug });
+
+if (!post) {
+  throw Astro.redirect('/404');
+}
 
 const formatDate = (d) =>
   d ? new Date(d).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
 ---
 
-<Layout title={post.data.title} description={post.data.description ?? ''}>
+<Layout title={post.title} description="">
   <Header />
   <main class="container-custom py-12">
     <article class="max-w-3xl mx-auto">
       <!-- Header Artikel -->
       <div class="mb-8">
-        <a href="/blog" class="text-sm text-primary-600 hover:underline">&larr; Back to Blog</a>
+        <a href="/blog" class="text-sm text-primary-600 hover:underline">&larr; Kembali ke Blog</a>
         <div class="flex items-center gap-2 mt-4 text-sm text-gray-500">
-          {post.data.category && (
+          {post.category && (
             <span class="px-2 py-1 bg-primary-100 text-primary-600 rounded-full text-xs font-medium">
-              {post.data.category}
+              {post.category}
             </span>
           )}
-          {post.data.date && (
+          {post.publishedAt && (
             <>
               <span>•</span>
-              <span>{formatDate(post.data.date)}</span>
+              <span>{formatDate(post.publishedAt)}</span>
             </>
           )}
         </div>
-        <h1 class="text-4xl font-bold text-gray-900 dark:text-white mt-4">{post.data.title}</h1>
-        {post.data.author && (
+        <h1 class="text-4xl font-bold text-gray-900 dark:text-white mt-4">{post.title}</h1>
+        {post.authorName && (
           <div class="flex items-center mt-4">
-            {post.data.authorAvatar && (
-              <img src={post.data.authorAvatar} alt={post.data.author} class="w-10 h-10 rounded-full mr-3" />
+            {post.authorImage?.asset?.url && (
+              <img src={post.authorImage.asset.url} alt={post.authorName} class="w-10 h-10 rounded-full mr-3" />
             )}
             <div>
-              <p class="font-medium">{post.data.author}</p>
-              {post.data.authorRole && (
-                <p class="text-sm text-gray-500">{post.data.authorRole}</p>
-              )}
+              <p class="font-medium">{post.authorName}</p>
             </div>
           </div>
         )}
-        {post.data.image && (
-          <img src={post.data.image} alt={post.data.title} class="w-full h-80 object-cover rounded-xl mt-6" />
+        {post.mainImage?.asset?.url && (
+          <img src={post.mainImage.asset.url} alt={post.title} class="w-full h-80 object-cover rounded-xl mt-6" />
         )}
       </div>
 
-      <!-- Konten Markdown -->
+      <!-- Konten Portable Text -->
       <div class="prose dark:prose-invert max-w-none">
-        <Content />
+        <PortableText value={post.body} />
       </div>
     </article>
   </main>
