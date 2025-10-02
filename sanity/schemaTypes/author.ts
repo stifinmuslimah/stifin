@@ -1,4 +1,4 @@
-import {defineField, defineType} from 'sanity'
+import { defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'author',
@@ -9,6 +9,7 @@ export default defineType({
       name: 'name',
       title: 'Name',
       type: 'string',
+      validation: Rule => Rule.required()
     }),
     defineField({
       name: 'slug',
@@ -20,8 +21,14 @@ export default defineType({
       },
     }),
     defineField({
+      name: 'role',                         // ✅ tambahkan jabatan/role
+      title: 'Role / Jabatan',
+      type: 'string',
+      description: 'Misal: Author, Editor, Bidan, Dokter, dsb.'
+    }),
+    defineField({
       name: 'image',
-      title: 'Image',
+      title: 'Avatar / Image',
       type: 'image',
       options: {
         hotspot: true,
@@ -35,15 +42,17 @@ export default defineType({
         {
           title: 'Block',
           type: 'block',
-          styles: [{title: 'Normal', value: 'normal'}],
+          styles: [{ title: 'Normal', value: 'normal' }],
           lists: [],
         },
       ],
+      description: 'Bio singkat tentang penulis (opsional).'
     }),
   ],
   preview: {
     select: {
       title: 'name',
+      subtitle: 'role',                     // ✅ tampilkan role di preview
       media: 'image',
     },
   },

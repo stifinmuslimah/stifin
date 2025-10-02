@@ -1,4 +1,4 @@
-import {defineField, defineType} from 'sanity'
+import { defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'post',
@@ -9,6 +9,7 @@ export default defineType({
       name: 'title',
       title: 'Title',
       type: 'string',
+      validation: Rule => Rule.required()
     }),
     defineField({
       name: 'slug',
@@ -18,12 +19,21 @@ export default defineType({
         source: 'title',
         maxLength: 96,
       },
+      validation: Rule => Rule.required()
+    }),
+    defineField({
+      name: 'description',               // ✅ meta description
+      title: 'Description',
+      type: 'text',
+      rows: 3,
+      description: 'Meta description atau ringkasan singkat artikel (digunakan untuk SEO & daftar blog)',
+      validation: Rule => Rule.max(160).warning('Sebaiknya tidak lebih dari 160 karakter.')
     }),
     defineField({
       name: 'author',
       title: 'Author',
       type: 'reference',
-      to: {type: 'author'},
+      to: { type: 'author' },
     }),
     defineField({
       name: 'mainImage',
@@ -37,7 +47,7 @@ export default defineType({
       name: 'categories',
       title: 'Categories',
       type: 'array',
-      of: [{type: 'reference', to: {type: 'category'}}],
+      of: [{ type: 'reference', to: { type: 'category' } }],
     }),
     defineField({
       name: 'publishedAt',
@@ -58,8 +68,8 @@ export default defineType({
       media: 'mainImage',
     },
     prepare(selection) {
-      const {author} = selection
-      return {...selection, subtitle: author && `by ${author}`}
+      const { author } = selection
+      return { ...selection, subtitle: author && `by ${author}` }
     },
   },
 })
