@@ -1,5 +1,5 @@
 ---
-title: Bismillah
+title: Bismillah First Post
 description: Bismillah
 image: >-
   https://assets.tina.io/1cb31063-daec-4535-bc90-2e4f06a5cb85/Logo STIFIn
