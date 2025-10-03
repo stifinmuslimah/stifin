@@ -3,19 +3,15 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { sanityClient } from "../../lib/sanityClient";
-import { PortableText } from "@portabletext/react";
+import PortableBody from "../../components/PortableBody";  // ✅ pakai komponen React
+
 export const prerender = false;
 
-
 export async function getStaticPaths() {
-  const posts = await sanityClient.fetch(`*[_type == "post"]{
-    "slug": slug.current
-  }`);
+  const posts = await sanityClient.fetch(`*[_type == "post"]{ "slug": slug.current }`);
   return posts
     .filter(p => p.slug)
-    .map((p) => ({
-      params: { slug: p.slug }
-    }));
+    .map((p) => ({ params: { slug: p.slug } }));
 }
 
 const { slug } = Astro.params;
@@ -24,9 +20,7 @@ const post = await sanityClient.fetch(
   `*[_type == "post" && slug.current == $slug][0]{
     title,
     description,
-    mainImage{
-      asset->{url}
-    },
+    mainImage{asset->{url}},
     publishedAt,
     body,
     "category": categories[0]->title
@@ -60,13 +54,17 @@ const formatDate = (d) =>
         </div>
         <h1 class="text-4xl font-bold text-gray-900 dark:text-white mt-4">{post?.title}</h1>
         {post?.mainImage?.asset?.url && (
-          <img src={post.mainImage.asset.url} alt={post.title} class="w-full h-80 object-cover rounded-xl mt-6" />
+          <img
+            src={post.mainImage.asset.url}
+            alt={post.title}
+            class="w-full h-80 object-cover rounded-xl mt-6"
+          />
         )}
       </div>
 
       <!-- Konten Artikel -->
       <div class="prose dark:prose-invert max-w-none">
-        <PortableText value={post?.body} />
+        <PortableBody client:load value={post?.body} />
       </div>
     </article>
   </main>
