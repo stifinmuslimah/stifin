@@ -191,4 +191,28 @@ article p {
   margin-bottom: 1em;
 }
 
+/* Untuk Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  height: 8px;           /* tinggi scrollbar horizontal */
+  width: 8px;            /* lebar scrollbar vertical */
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;   /* warna background track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;      /* warna thumb */
+  border-radius: 4px;    /* sudut thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;      /* warna thumb saat hover */
+}
+
+/* Untuk Firefox */
+* {
+  scrollbar-width: thin;        /* tipis */
+  scrollbar-color: #9ccca4 #f1f1f1; /* thumb track */
+}
 
