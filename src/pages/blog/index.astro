@@ -4,6 +4,8 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import HeroSection from '../../components/HeroSection.astro';
 import { sanityClient } from "../../lib/sanityClient";
+export const prerender = false;
+
 
 // === FETCH POSTINGAN SANITY ===
 const posts = await sanityClient.fetch(`*[_type == "post"] | order(_createdAt desc){
