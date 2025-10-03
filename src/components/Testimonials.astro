@@ -1,4 +1,10 @@
 ---
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { Navigation, Pagination } from 'swiper/modules';
+
 const testimonials = [
   {
     content: "Sudah sejak lama saya sangat terbantu dengan adanya tools STIFIn Genetic. Tes STIFIn ini membantu kita untuk menemukan potensi diri, menemukan peran terbaik apa yang semestinya kita pilih dan memudahkan kita dalam memaksimalkan ibadah kita. Saya sangat - sangat merekomendasikan agar teman-teman Tes di STIFIn Genetic.",
@@ -43,6 +49,57 @@ const testimonials = [
     avatar: "/asetweb/kris.webp"
   }
 ];
+
+const tokoh = [
+  { nama: "Aa Gym", foto: "/asetweb/tokoh/aa-gym.png" },
+  { nama: "Teuku Wisnu", foto: "/asetweb/tokoh/teuku-wisnu.png" },
+  { nama: "Ippho Santosa", foto: "/asetweb/tokoh/ippho.png" },
+  { nama: "Arie Untung", foto: "/asetweb/tokoh/arie-untung.png" },
+  { nama: "Coash Fahmi", foto: "/asetweb/tokoh/coach-fahmi.png" },
+  { nama: "Ary Ginanjar", foto: "/asetweb/tokoh/ginanjar.png" },
+  { nama: "Tom MC Ifle", foto: "/asetweb/tokoh/ifle.png" },
+  { nama: "Nikita Willy", foto: "/asetweb/tokoh/nikita.png" },
+  { nama: "UU Ruzhanul Ulum", foto: "/asetweb/tokoh/ulum.png" },
+  { nama: "Evan Dimas", foto: "/asetweb/tokoh/evan.png" },
+  { nama: "Ust Erick", foto: "/asetweb/tokoh/erick.png" },
+  { nama: "Achmad Kalla", foto: "/asetweb/tokoh/kalla.png" },
+  { nama: "Raisa Andriana", foto: "/asetweb/tokoh/raisa.png" },
+  { nama: "Indra Bekti", foto: "/asetweb/tokoh/bekti.png" },
+  { nama: "Subiakto", foto: "/asetweb/tokoh/subiakto.png" },
+  { nama: "Habib Rizieq", foto: "/asetweb/tokoh/rizieq.png" },
+  { nama: "Ustdz. Irena", foto: "/asetweb/tokoh/irena.png" },
+  { nama: "Tasya Kamila", foto: "/asetweb/tokoh/tasya.png" },
+  { nama: "Indra Syafri", foto: "/asetweb/tokoh/syafri.png" },
+  { nama: "Ria Ricis", foto: "/asetweb/tokoh/ricis.png" },
+  { nama: "Jaya Setiabudi", foto: "/asetweb/tokoh/jaya.png" },
+  { nama: "Cak Lontong", foto: "/asetweb/tokoh/lontong.png" },
+  { nama: "Larissa Chou", foto: "/asetweb/tokoh/chou.png" },
+  { nama: "Indari Mastuti", foto: "/asetweb/tokoh/indari.png" },
+  { nama: "Erika Suryani", foto: "/asetweb/tokoh/erika.png" },
+  { nama: "Dr. Indrawan", foto: "/asetweb/tokoh/indrawan.png" },
+  { nama: "Maia Estianti", foto: "/asetweb/tokoh/maia.png" },
+  { nama: "Ustdz. Ninih", foto: "/asetweb/tokoh/ninih.png" },
+  { nama: "Meida Safira", foto: "/asetweb/tokoh/safira.png" },
+  { nama: "Sherly Annavita", foto: "/asetweb/tokoh/sherly.png" },
+  { nama: "Alm. Ust Arifin", foto: "/asetweb/tokoh/arifin.png" },
+  { nama: "Jamil Azzaini", foto: "/asetweb/tokoh/jamil.png" },
+  { nama: "Ustdz. Oki", foto: "/asetweb/tokoh/oki.png" },
+  { nama: "Ust. Maulana", foto: "/asetweb/tokoh/maulana.png" },
+  { nama: "Helvy Tiana", foto: "/asetweb/tokoh/helvy.png" },
+  { nama: "Farid Poniman", foto: "/asetweb/tokoh/farid.png" },
+  { nama: "Melly Goeslaw", foto: "/asetweb/tokoh/goeslaw.png" },
+  { nama: "Hamish Daud", foto: "/asetweb/tokoh/daud.png" },
+  { nama: "Buya Yahya", foto: "/asetweb/tokoh/buyahya.png" },
+  { nama: "Parto Patrio", foto: "/asetweb/tokoh/patrio.png" },
+  { nama: "Ust Yusuf Mansur", foto: "/asetweb/tokoh/mansur.png" },
+  { nama: "Ust Felix Siauw", foto: "/asetweb/tokoh/felix.png" },
+  { nama: "Ust Fatuh Karim", foto: "/asetweb/tokoh/fatih.png" },
+  { nama: "Ust Hanan Attaki", foto: "/asetweb/tokoh/attaki.png" },
+  { nama: "Helmi Yahya", foto: "/asetweb/tokoh/helmi.png" },
+
+  // ... sampai 45 orang
+];
+
 ---
 
 <section id="testimonials" class="section pt-10">
@@ -88,7 +145,27 @@ const testimonials = [
         </div>
       ))}
     </div>
-    
+
+<div class="mt-16 text-center max-w-3xl mx-auto mb-16">
+  <span class="inline-block px-4 py-1 rounded-full bg-secondary-100 dark:bg-secondary-900 text-secondary-600 dark:text-secondary-300 font-medium text-sm mb-4">
+        Tokoh Publik
+      </span>
+  <p class="text-gray-600 dark:text-gray-300">
+        <b>Para Tokoh Publik yang Sudah Tes STIFIn!</b>
+      </p>
+</div>
+
+<!-- Grid Foto Tokoh -->
+<div class="overflow-x-auto flex gap-6 snap-x snap-mandatory pb-4">
+  {tokoh.map((item) => (
+    <div class="flex-shrink-0 snap-start w-28 text-center">
+      <img src={item.foto} alt={item.nama} class="w-24 h-24 mx-auto rounded-lg object-cover mb-2" />
+      <p class="text-sm font-medium">{item.nama}</p>
+    </div>
+  ))}
+</div>
+
+
     <div id="gabung" class="mt-16 bg-linear-to-r from-primary-600 to-secondary-600 rounded-2xl p-8 md:p-12 relative overflow-hidden">
       <div class="absolute inset-0 bg-linear-to-r from-primary-600/30 to-secondary-600/30 backdrop-blur-xs"></div>
       <div class="relative z-10 text-center md:text-left md:flex items-center justify-between">
