@@ -11,7 +11,7 @@ A modern, responsive Astro template with Tailwind CSS and Alpine.js integration.
 - [Alpine.js](https://alpinejs.dev/) - Lightweight JavaScript framework for interactivity
 - Responsive design system with custom color palette
 - Dark mode support
-- Smooth page transitions
+- Smooth page transitions.
 - Performance optimized
 - SEO-friendly
 
