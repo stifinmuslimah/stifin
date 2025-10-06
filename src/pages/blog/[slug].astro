@@ -5,14 +5,15 @@ import Footer from '../../components/Footer.astro';
 import { sanityClient } from "../../lib/sanityClient";
 import PortableBody from "../../components/PortableBody";  // ✅ pakai komponen React
 
-export const prerender = false;
-
 export async function getStaticPaths() {
   const posts = await sanityClient.fetch(`*[_type == "post"]{ "slug": slug.current }`);
   return posts
     .filter(p => p.slug)
     .map((p) => ({ params: { slug: p.slug } }));
 }
+
+// ✅ pastikan static
+export const prerender = true;
 
 const { slug } = Astro.params;
 
