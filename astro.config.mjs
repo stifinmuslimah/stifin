@@ -8,7 +8,7 @@ import sitemap from '@astrojs/sitemap'           // ✅ plugin sitemap resmi
 
 export default defineConfig({
   // Pastikan URL ini sesuai dengan domain final
-  site: 'https://stifinmuslimah.com',
+  site: 'https://www.stifinmuslimah.com',
 
   // Gunakan static adapter supaya tidak ada serverless function
   adapter: vercel(),
@@ -21,7 +21,6 @@ export default defineConfig({
       entryLimit: 5000,      // jika halaman banyak, dibagi max 5000 per file
       changefreq: 'weekly',  // rekomendasi update sitemap
       priority: 0.7,         // prioritas default
-      lastmod: true          // otomatis isi tanggal modifikasi terakhir
     })
   ],
 
