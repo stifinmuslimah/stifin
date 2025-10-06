@@ -3,25 +3,21 @@ import { defineConfig } from 'astro/config';
 import alpinejs from '@astrojs/alpinejs';
 import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
-import vercel from '@astrojs/vercel/serverless';   // ✅ adapter Vercel
-import sitemap from '@astrojs/sitemap';             // ✅ sitemap otomatis
+import vercel from '@astrojs/vercel/static';   // 👉 gunakan static adapter
+import sitemap from '@astrojs/sitemap';
 
-// https://astro.build/config
 export default defineConfig({
-  site: 'https://stifinmuslimah.com', // ✅ WAJIB untuk sitemap & tag canonical
-  output: 'server',                   // ✅ SSR mode
-  adapter: vercel(),                  // ✅ gunakan adapter serverless Vercel
-
+  site: 'https://stifinmuslimah.com',          // wajib untuk sitemap
+  adapter: vercel(),
   integrations: [
     alpinejs(),
     react(),
-    sitemap({                         // ✅ Sitemap otomatis
+    sitemap({
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: true
     })
   ],
-
   vite: {
     plugins: [tailwindcss()]
   }

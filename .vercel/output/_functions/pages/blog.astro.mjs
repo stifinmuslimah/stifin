@@ -1,6 +1,6 @@
 import { e as createComponent, k as renderComponent, r as renderTemplate, m as maybeRenderHead, h as addAttribute } from '../chunks/astro/server_kVglWhb0.mjs';
 import 'kleur/colors';
-import { $ as $$Layout, a as $$Header, b as $$Footer } from '../chunks/Footer_B331rUhd.mjs';
+import { $ as $$Layout, a as $$Header, b as $$Footer } from '../chunks/Footer_CuRfGUrV.mjs';
 import { $ as $$HeroSection } from '../chunks/HeroSection_BXucKKop.mjs';
 import { s as sanityClient } from '../chunks/sanityClient_D1-zcEns.mjs';
 export { renderers } from '../renderers.mjs';

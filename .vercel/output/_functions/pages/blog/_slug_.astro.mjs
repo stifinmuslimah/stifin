@@ -1,6 +1,6 @@
 import { e as createComponent, f as createAstro, k as renderComponent, r as renderTemplate, m as maybeRenderHead, l as Fragment, h as addAttribute } from '../../chunks/astro/server_kVglWhb0.mjs';
 import 'kleur/colors';
-import { $ as $$Layout, a as $$Header, b as $$Footer } from '../../chunks/Footer_B331rUhd.mjs';
+import { $ as $$Layout, a as $$Header, b as $$Footer } from '../../chunks/Footer_CuRfGUrV.mjs';
 import { s as sanityClient } from '../../chunks/sanityClient_D1-zcEns.mjs';
 import { jsx } from 'react/jsx-runtime';
 import { PortableText } from '@portabletext/react';
