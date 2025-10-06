@@ -1,0 +1,128 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import HeroSection from '../../components/HeroSection.astro';
+import { sanityClient } from "../../lib/sanityClient";
+export const prerender = false;
+
+
+// === FETCH POSTINGAN SANITY ===
+const posts = await sanityClient.fetch(`*[_type == "post"] | order(_createdAt desc){
+  _id,
+  title,
+  "slug": slug.current,
+  "category": categories[0]->title,
+  description,
+  mainImage{
+    asset->{url}
+  },
+  publishedAt,
+  "authorName": author->name,
+  "authorRole": author->role,
+  "authorImage": author->image{
+    asset->{url}
+  }
+}`);
+
+// Ambil daftar kategori unik
+const categories = [...new Set(posts.map(p => p.category || 'Uncategorized'))];
+
+const formatDate = (d) =>
+  d ? new Date(d).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
+const slugify = (s) => String(s ?? 'Uncategorized').trim().toLowerCase().replace(/\s+/g, '-');
+---
+
+<Layout title="Blog - STIFIn Muslimah" description="Temukan wawasan STIFIn, potensi genetik, dan pengembangan diri untuk hidup lebih selaras dan SuksesMulia.">
+  <Header />
+  <main>
+    <HeroSection 
+      title="Blog " 
+      highlightText="STIFIn Muslimah"
+      description="Temukan wawasan STIFIn, potensi genetik, dan pengembangan diri untuk hidup lebih selaras dan SuksesMulia."
+    />
+    
+    <!-- Category Filter -->
+    <div class="container-custom py-8">
+      <div class="flex flex-wrap gap-4 justify-center mb-12">
+        <a href="#" class="px-4 py-2 rounded-full bg-primary-600 text-white font-medium text-sm hover:bg-primary-700 transition-colors">
+          All Posts
+        </a>
+
+        {categories.map((category) => {
+          const cat = category ?? 'Uncategorized';
+          return (
+            <a
+              href={'#' + slugify(cat)}
+              class="px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-medium text-sm hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+            >
+              {cat}
+            </a>
+          );
+        })}
+      </div>
+
+      <!-- GRID LIST BLOG -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {posts.map((post, index) => {
+          const image = post.mainImage?.asset?.url ?? '/images/default.jpg';
+          return (
+            <div class="card border border-gray-200 dark:border-gray-700 overflow-hidden slide-up" style={'animation-delay: ' + (index * 100) + 'ms'}>
+              <a href={'/blog/' + post.slug} class="block">
+                <img 
+                  src={image}
+                  alt={post.title}
+                  class="w-full h-48 object-cover"
+                  loading="lazy"
+                />
+              </a>
+              <div class="p-6">
+                <div class="flex items-center mb-4">
+                  <span class="text-sm font-medium text-primary-600 dark:text-primary-400">{post.category ?? 'Uncategorized'}</span>
+                  <span class="mx-2 text-gray-300 dark:text-gray-600">•</span>
+                  <span class="text-sm text-gray-500 dark:text-gray-400">{formatDate(post.publishedAt)}</span>
+                </div>
+                <a href={'/blog/' + post.slug} class="block mb-3">
+                  <h2 class="text-xl font-semibold text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors">{post.title}</h2>
+                </a>
+                <p class="text-gray-600 dark:text-gray-300 mb-6">
+                  {post.description ?? ''}
+                </p>
+
+                <!-- AUTHOR INFO -->
+                {post.authorName && (
+                  <div class="flex items-center">
+                    {post.authorImage?.asset?.url && (
+                      <img 
+                        src={post.authorImage.asset.url} 
+                        alt={post.authorName} 
+                        class="w-10 h-10 rounded-full mr-3 object-cover"
+                        loading="lazy"
+                      />
+                    )}
+                    <div>
+                      <p class="font-medium text-gray-900 dark:text-white">{post.authorName}</p>
+                      <p class="text-sm text-gray-500 dark:text-gray-400">
+                        {post.authorRole ?? 'Author'}
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <div class="mt-12 flex justify-center">
+        <a href="#" class="btn-outline">
+          Load More Articles
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v10.586l3.293-3.293a1 1 0 011.414 1.414l-5 5a1 1 0 01-1.414 0l-5-5a1 1 0 111.414-1.414L9 14.586V4a1 1 0 011-1z" clip-rule="evenodd" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>

@@ -1,0 +1,92 @@
+{
+	"version": 3,
+	"routes": [
+		{
+			"handle": "filesystem"
+		},
+		{
+			"src": "^/_astro/(.*)$",
+			"headers": {
+				"cache-control": "public, max-age=31536000, immutable"
+			},
+			"continue": true
+		},
+		{
+			"src": "^/_server-islands/([^/]+?)/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/_image/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/404/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/about/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/blog/([^/]+?)/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/blog/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/career/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/case-study/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/changelog/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/contact/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/faqs/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/features/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/integrations/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/privacy-policy/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/promotor/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/reviews/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/terms-conditions/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/.*$",
+			"dest": "_render",
+			"status": 404
+		}
+	]
+}

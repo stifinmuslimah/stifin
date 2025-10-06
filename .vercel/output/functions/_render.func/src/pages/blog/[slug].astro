@@ -1,0 +1,72 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { sanityClient } from "../../lib/sanityClient";
+import PortableBody from "../../components/PortableBody";  // ✅ pakai komponen React
+
+export const prerender = false;
+
+export async function getStaticPaths() {
+  const posts = await sanityClient.fetch(`*[_type == "post"]{ "slug": slug.current }`);
+  return posts
+    .filter(p => p.slug)
+    .map((p) => ({ params: { slug: p.slug } }));
+}
+
+const { slug } = Astro.params;
+
+const post = await sanityClient.fetch(
+  `*[_type == "post" && slug.current == $slug][0]{
+    title,
+    description,
+    mainImage{asset->{url}},
+    publishedAt,
+    body,
+    "category": categories[0]->title
+  }`,
+  { slug }
+);
+
+const formatDate = (d) =>
+  d ? new Date(d).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
+---
+
+<Layout title={post?.title ?? 'Artikel'} description={post?.description ?? ''}>
+  <Header />
+  <main class="container-custom py-12">
+    <article class="max-w-3xl mx-auto">
+      <!-- Header Artikel -->
+      <div class="mb-8">
+        <a href="/blog" class="text-sm text-primary-600 hover:underline">&larr; Kembali ke Blog</a>
+        <div class="flex items-center gap-2 mt-4 text-sm text-gray-500">
+          {post?.category && (
+            <span class="px-2 py-1 bg-primary-100 text-primary-600 rounded-full text-xs font-medium">
+              {post.category}
+            </span>
+          )}
+          {post?.publishedAt && (
+            <>
+              <span>•</span>
+              <span>{formatDate(post.publishedAt)}</span>
+            </>
+          )}
+        </div>
+        <h1 class="text-4xl font-bold text-gray-900 dark:text-white mt-4">{post?.title}</h1>
+        {post?.mainImage?.asset?.url && (
+          <img
+            src={post.mainImage.asset.url}
+            alt={post.title}
+            class="w-full h-80 object-cover rounded-xl mt-6"
+          />
+        )}
+      </div>
+
+      <!-- Konten Artikel -->
+      <div class="prose dark:prose-invert max-w-none">
+        <PortableBody client:load value={post?.body} />
+      </div>
+    </article>
+  </main>
+  <Footer />
+</Layout>
