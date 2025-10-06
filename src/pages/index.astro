@@ -8,8 +8,46 @@ import Newsletter from '../components/Newsletter.astro';
 import Footer from '../components/Footer.astro';
 ---
 
-<Layout title="STIFIn Muslimah - Tes Kepribadian dan Pengembangan Diri">
+<Layout title="STIFIn Muslimah - Tes Kepribadian dan Pengembangan Diri" description="Platform pengembangan diri berbasis STIFIn untuk muslimah, tes sidik jari untuk menemukan potensi genetik dan arah hidup.">
   <Header />
+
+  <!-- 🔽 Tambahkan JSON-LD Organization -->
+  <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: "STIFIn Muslimah",
+      url: "https://www.stifinmuslimah.com",
+      logo: "https://www.stifinmuslimah.com/asetweb/logo.png",
+      sameAs: [
+        "https://www.instagram.com/stifinmuslimah",
+        "https://www.facebook.com/stifinmuslimah",
+        "https://www.threads.com/@stifinmuslimah"
+      ]
+    })}
+  </script>
+
+  <!-- 🔽 Tambahkan JSON-LD Product/Offer (opsional tapi bagus untuk SEO produk tes) -->
+  <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Product",
+      name: "Tes STIFIn Muslimah",
+      description: "Tes sidik jari untuk mengetahui kecerdasan dan kepribadian genetik.",
+      image: ["https://www.stifinmuslimah.com/asetweb/logo.png"],
+      brand: { "@type": "Brand", name: "STIFIn Muslimah" },
+      offers: [
+        {
+          "@type": "Offer",
+          priceCurrency: "IDR",
+          price: "600000",
+          availability: "https://schema.org/InStock",
+          url: "https://www.stifinmuslimah.com"
+        }
+      ]
+    })}
+  </script>
+
   <main>
     <Hero />
     <Features />
