@@ -3,7 +3,9 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { sanityClient } from "../../lib/sanityClient";
-import PortableBody from "../../components/PortableBody";  // ✅ pakai komponen React
+import PortableBody from "../../components/PortableBody";
+
+export const prerender = true;
 
 export async function getStaticPaths() {
   const posts = await sanityClient.fetch(`*[_type == "post"]{ "slug": slug.current }`);
@@ -11,9 +13,6 @@ export async function getStaticPaths() {
     .filter(p => p.slug)
     .map((p) => ({ params: { slug: p.slug } }));
 }
-
-// ✅ pastikan static
-export const prerender = true;
 
 const { slug } = Astro.params;
 
@@ -24,7 +23,9 @@ const post = await sanityClient.fetch(
     mainImage{asset->{url}},
     publishedAt,
     body,
-    "category": categories[0]->title
+    "category": categories[0]->title,
+    "authorName": author->name,
+    "authorImage": author->image{asset->{url}}
   }`,
   { slug }
 );
@@ -35,9 +36,40 @@ const formatDate = (d) =>
 
 <Layout title={post?.title ?? 'Artikel'} description={post?.description ?? ''}>
   <Header />
+
+  <!-- ✅ JSON-LD ARTICLE SCHEMA -->
+  {post && (
+    <script type="application/ld+json">
+      {JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: post.title,
+        description: post.description,
+        image: post.mainImage?.asset?.url ? [post.mainImage.asset.url] : [],
+        datePublished: post.publishedAt,
+        dateModified: post.publishedAt,
+        author: {
+          "@type": "Person",
+          name: post.authorName ?? "STIFIn Muslimah"
+        },
+        publisher: {
+          "@type": "Organization",
+          name: "STIFIn Muslimah",
+          logo: {
+            "@type": "ImageObject",
+            url: "https://www.stifinmuslimah.com/asetweb/logo.png"
+          }
+        },
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": `https://www.stifinmuslimah.com/blog/${slug}`
+        }
+      })}
+    </script>
+  )}
+
   <main class="container-custom py-12">
     <article class="max-w-3xl mx-auto">
-      <!-- Header Artikel -->
       <div class="mb-8">
         <a href="/blog" class="text-sm text-primary-600 hover:underline">&larr; Kembali ke Blog</a>
         <div class="flex items-center gap-2 mt-4 text-sm text-gray-500">
@@ -63,11 +95,11 @@ const formatDate = (d) =>
         )}
       </div>
 
-      <!-- Konten Artikel -->
       <div class="prose dark:prose-invert max-w-none">
         <PortableBody client:load value={post?.body} />
       </div>
     </article>
   </main>
+
   <Footer />
 </Layout>
