@@ -20,6 +20,7 @@
   "dependencies": {
     "@astrojs/alpinejs": "^0.4.9",
     "@astrojs/react": "^4.4.0",
+    "@astrojs/sitemap": "^3.6.0",
     "@astrojs/vercel": "^8.2.8",
     "@portabletext/react": "^4.0.3",
     "@sanity/client": "^7.11.2",
